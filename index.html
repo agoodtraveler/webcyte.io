@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>webcyte</title>
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+               
+        <noscript>
+            <div id="noscript">
+                <strong>ERROR!</strong>
+                <p>This browser doesn't support JavaScript, or has JavaScript disabled.</p>
+                <p>(webcyte requires JavaScript to function - make sure JavaScript is enabled, or try another browser.)</p>
+            </div>
+        </noscript>
+
+        <svg xmlns="http://www.w3.org/2000/svg"  style="display: none" hidden aria-hidden="true" focusable="false">
+            <symbol id="saveImg" viewBox="0 0 512 512">
+                <path d="M320 336h76c55 0 100-21.21 100-75.6s-53-73.47-96-75.6C391.11 99.74 329 48 256 48c-69 0-113.44 45.79-128 91.2-60 5.7-112 35.88-112 98.4S70 336 136 336h56M192 400.1l64 63.9 64-63.9M256 224v224.03" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+           </symbol>
+            <symbol id="openImg" viewBox="0 0 512 512">
+                <path d="M320 367.79h76c55 0 100-29.21 100-83.6s-53-81.47-96-83.6c-8.89-85.06-71-136.8-144-136.8-69 0-113.44 45.79-128 91.2-60 5.7-112 43.88-112 106.4s54 106.4 120 106.4h56" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M320 255.79l-64-64-64 64M256 448.21V207.79"/>
+            </symbol>
+            <symbol id="addImg" viewBox="0 0 512 512">
+                <path fill="none" stroke="currentColor" stroke-linecap="square" stroke-linejoin="round" stroke-width="32" d="M256 112v288M400 256H112"/>
+            </symbol>
+            <symbol id="trashImg" viewBox="0 0 512 512">
+                <path d="M112 112l20 320c.95 18.49 14.4 32 32 32h184c17.67 0 30.87-13.51 32-32l20-320" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+                <path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M80 112h352"/>
+                <path d="M192 112V72h0a23.93 23.93 0 0124-24h80a23.93 23.93 0 0124 24h0v40M256 176v224M184 176l8 224M328 176l-8 224" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/>
+            </symbol>
+            <symbol id="refreshImg" viewBox="0 0 512 512">
+                <path d="M320 146s24.36-12-64-12a160 160 0 10160 160" fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 58l80 80-80 80"/>
+            </symbol>
+            <symbol id="playImg" viewBox="0 0 512 512">
+                <path d="M112 111v290c0 17.44 17 28.52 31 20.16l247.9-148.37c12.12-7.25 12.12-26.33 0-33.58L143 90.84c-14-8.36-31 2.72-31 20.16z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/>
+            </symbol>
+            <symbol id="pauseImg" viewBox="0 0 512 512">
+                <path  fill="currentColor" d="M224 432h-80V80h80zM368 432h-80V80h80z"/>
+            </symbol>
+            <symbol id="logImg" viewBox="0 0 512 512">
+                <rect x="96" y="48" width="320" height="416" rx="48" ry="48" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M176 128h160M176 208h160M176 288h80"/>
+            </symbol>
+        </svg>
+
+
+
+        <div id="contents">
+            <div id="mainPanel">
+                <span id="header">
+                    <span class="controls">
+                        <button title="Run all units in this substrate." onclick="runSubstrate()">
+                            <svg class="ionicon"><use href="#refreshImg"></use></svg>
+                        </button>
+                        <button title="Load substrate from local (JSON) file." onclick="loadFromFile()">
+                            <svg class="ionicon"><use href="#openImg"></use></svg>
+                        </button>
+                        <button title="Download substrate as a (JSON) file." onclick="saveToFile()">
+                            <svg class="ionicon"><use href="#saveImg"></use></svg>
+                        </button>
+                        <button title="Toggle log." onclick="toggleLog()">
+                            <svg class="ionicon"><use href="#logImg"></use></svg>
+                        </button>
+                    </span>
+                </span>
+            </div>
+            <div id="logPanel" class="panel hidden">
+                <div class="resizer"  onmousedown="resizeLog(event)"></div>
+            </div>
+        </div>
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js" onload="console.log('tfjs laoded.')" onerror="alert('Error loading tensorflow library.')"></script>
+
+        <script src="lib/CodeMirror.js"></script>
+
+        <script src="utils/html.js"></script>
+        <script src="utils/State.js"></script>
+        <script src="utils/StateView.js"></script>
+        <script src="utils/GridView.js"></script>
+
+        <script src="editorTheme.js"></script>
+        <script src="Unit.js"></script>
+        <script src="Substrate.js"></script>
+        <script src="defaultSubstrate.js"></script>
+        <script src="index.js"></script>
+
+    </body>
+</html>

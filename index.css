@@ -1,0 +1,262 @@
+:root {
+    --bgColor: 		#282A36;
+    --textColor: 	#869aa6;
+    --headerColor: #181d26;  
+    --brightTextColor: #c1ceD9;
+    --scrollBarColor: #FFF1 #0004;
+    --btnSize: 1.5em;
+    --btnFontSize: 14pt;
+}
+
+
+
+body {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+    background-color: var(--bgColor);
+    color: var(--textColor);
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    scrollbar-width: thin;
+}
+button {
+    user-select: none;
+    -webkit-user-select: none;
+    background-color: #0000;
+    color: #FFF6;
+    border: 1pt solid;
+    border-radius: 4pt;
+    font-size: var(--btnFontSize);
+    line-height: 0em;
+    padding: 0.5ch;
+    transition: color 0.4s, background-color 0.4s;
+}
+button:hover {
+    color: #FFFF;
+}
+button:active {
+    background-color: #FFF4;
+}
+canvas {
+    --s: 2ch;
+    border: 1pt solid var(--brightTextColor); 
+    mask: 
+        conic-gradient(#000 0 0) content-box,
+        conic-gradient(at var(--s) var(--s),#0000 75%,#000 0) 
+        0 0/calc(100% - var(--s)) calc(100% - var(--s));
+    image-rendering: pixelated;
+}
+a {
+    color: var(--brightTextColor);
+}
+a:visited {
+    color: cadetblue;
+}
+h1, h2, h3 {
+    margin: 0pt;
+}
+details summary::marker,:is(::-webkit-details-marker) {
+  color: #FFF4;
+}
+
+
+
+.column {
+    display: flex;
+    flex-flow: column;
+}
+.row {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.panel {
+    display: flex;
+    flex-flow: row;
+    background-color: #242424;
+    overflow: hidden;
+}
+.panel.hidden {
+    width: 0px !important;
+}
+.panel .resizer {
+    width: 1ch;
+    background-color: #0000;
+    cursor: ew-resize;
+}
+@media screen and (max-width: 80ch) {
+    #logPanel {
+        position: absolute;
+        width: 90%;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+}
+.panel .log {
+    padding: 1ch;
+    flex: 1;
+    font-size: 0.8em;
+    overflow-y: scroll;
+    scrollbar-color: var(--scrollBarColor);
+}
+.panel .log .line {
+    display: flex;
+    flex-flow: row wrap;
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    border-bottom: 1pt solid #FFF1;
+}
+.panel .log .line.error {
+    border-left: 2pt solid darkred;
+}
+.panel .log .line .time {
+    color: gray;
+    margin-right: 2ch;
+}
+.panel .log .line a {
+    margin-left: 1ch;
+}
+.panel .log .line .text {
+    color: var(--brightTextColor);
+    margin-left: 1ch;
+}
+
+
+
+#contents {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+#mainPanel {
+    position: relative;
+    flex: 1;
+}
+#header {
+    position: absolute;
+    top: 0.5ch;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--headerColor);
+    z-index: 999;
+}
+#header .controls {
+    padding: 0.5ch;
+    border: 1pt solid #FFF4;
+    border-radius: 4pt;
+}
+#header .controls button {
+    margin-right: 0.5ch;
+    margin-left: 0.5ch;
+    border: none;
+}
+
+
+
+.Substrate {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden; /* TODO: better way to fix (horizontal) overflow (seemingly) due to vertical scroll bar. */
+    scrollbar-color: var(--scrollBarColor);
+}
+
+.Unit {
+    display: flex;
+    flex-flow: row nowrap;
+    margin-right: 2ch;
+}
+
+.Unit .handle .controls {
+    position: sticky;
+    top: 0px;
+    display: flex;
+    flex-flow: column;
+    justify-content: start;
+    align-items: center;
+    padding: 1ch;
+}
+.Unit .handle .controls .title {
+    writing-mode: sideways-lr;
+    margin-top: 1ch;
+    margin-bottom: 1ch;
+    line-height: 1.5em;
+    min-height: 2ch;
+    width: 1.5em;
+    letter-spacing: 1px;
+    overflow: hidden;
+}
+.Unit .handle .controls .title.invalid {
+    border-radius: 2pt;
+    outline: 2pt solid darkred;
+}
+
+.Unit .contents {
+    display: flex;
+    flex-flow: column;
+    flex-grow: 1;
+}
+.Unit .contents .prefixDiv {
+    margin: 0 4ch 0 4ch;
+}
+.Unit .contents .suffixDiv {
+    margin: 0 4ch 0 4ch;
+}
+
+.Unit .contents .column {
+    padding: 1ch;
+}
+.Unit .contents .row {
+    padding: 1ch;
+}
+
+.Unit .contents .editor {
+    display: flex;
+    flex-flow: column;
+}
+.cm-editor {
+    flex: 1;
+    /* background-color: transparent; */
+    font-size: 11pt;
+}
+.cm-editor .cm-gutters {
+    background-color: transparent;
+}
+.cm-editor.cm-focused {
+    outline: none;
+}
+
+
+
+.insert {
+    width: 100%;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-left: 1ch;
+}
+.insert button {
+    border: none;
+}
+
+
+.ionicon {
+    fill: currentColor;
+    stroke: currentColor;
+    width: 1.0em;
+    height: 1.0em;
+}
